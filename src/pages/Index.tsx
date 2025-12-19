@@ -340,10 +340,12 @@ const Index = () => {
                     <div className="font-orbitron font-bold mb-1">Discord</div>
                     <div className="text-muted-foreground">discord.gg/cs16cyber</div>
                   </div>
-                  <div className="p-4 bg-muted/20 rounded-lg">
-                    <Icon name="Send" className="mb-2 text-accent" size={24} />
-                    <div className="font-orbitron font-bold mb-1">Telegram</div>
-                    <div className="text-muted-foreground">@cs16_cyber_arena</div>
+                  <div className="p-4 bg-muted/20 rounded-lg cursor-pointer hover:bg-muted/30 transition-colors">
+                    <a href="https://t.me/cs16_cyber_arena" target="_blank" rel="noopener noreferrer" className="block">
+                      <Icon name="Send" className="mb-2 text-accent" size={24} />
+                      <div className="font-orbitron font-bold mb-1">Telegram</div>
+                      <div className="text-muted-foreground">@cs16_cyber_arena</div>
+                    </a>
                   </div>
                   <div className="p-4 bg-muted/20 rounded-lg">
                     <Icon name="Globe" className="mb-2 text-primary" size={24} />
