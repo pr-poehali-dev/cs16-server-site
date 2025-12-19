@@ -347,10 +347,12 @@ const Index = () => {
                       <div className="text-muted-foreground">@cs16_cyber_arena</div>
                     </a>
                   </div>
-                  <div className="p-4 bg-muted/20 rounded-lg">
-                    <Icon name="Globe" className="mb-2 text-primary" size={24} />
-                    <div className="font-orbitron font-bold mb-1">VK Группа</div>
-                    <div className="text-muted-foreground">vk.com/cs16cyber</div>
+                  <div className="p-4 bg-muted/20 rounded-lg cursor-pointer hover:bg-muted/30 transition-colors">
+                    <a href="https://vk.me/join/V2RbOc0MHktd57U8LdvmSo_bFmHJTp0BSEM=" target="_blank" rel="noopener noreferrer" className="block">
+                      <Icon name="Globe" className="mb-2 text-primary" size={24} />
+                      <div className="font-orbitron font-bold mb-1">VK Группа</div>
+                      <div className="text-muted-foreground">vk.com/cs16cyber</div>
+                    </a>
                   </div>
                 </div>
               </CardContent>
