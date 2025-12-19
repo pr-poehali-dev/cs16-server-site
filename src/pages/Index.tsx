@@ -83,9 +83,7 @@ const Index = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
               <Card className="neon-border bg-card/50 backdrop-blur-sm animate-pulse-glow">
                 <CardContent className="p-6">
-                  <div className="text-4xl font-orbitron font-bold text-primary">
-                    92.168.1.1:27015
-                  </div>
+                  <div className="text-4xl font-orbitron font-bold text-primary">26.14.27.135:27015</div>
                   <div className="text-sm text-muted-foreground mt-2">IP АДРЕС СЕРВЕРА</div>
                 </CardContent>
               </Card>
