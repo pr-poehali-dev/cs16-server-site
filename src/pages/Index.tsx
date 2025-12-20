@@ -76,8 +76,11 @@ const Index = () => {
             <h2 className="text-6xl md:text-8xl font-orbitron font-black neon-glow animate-slide-up">
               CYBER<span className="text-secondary">ARENA</span>
             </h2>
-            <p className="text-xl md:text-2xl text-muted-foreground font-roboto max-w-2xl mx-auto">
-              Легендарный сервер Counter-Strike 1.6 с уникальной системой рангов
+            <p className="text-xl md:text-2xl text-muted-foreground font-roboto max-w-2xl mx-auto leading-relaxed">
+              Окунись в мир жестких боев и эпических противостояний. 
+              <span className="text-primary"> Уникальная система рангов</span>, 
+              кастомные карты и <span className="text-secondary">активное коммьюнити</span> ждут тебя. 
+              Докажи, что ты — лучший!
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
