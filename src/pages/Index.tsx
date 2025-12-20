@@ -36,6 +36,22 @@ const Index = () => {
     },
   ];
 
+  const clans = [
+    { id: 1, name: '[ELITE]', tag: 'ELT', members: 28, rating: 8750, leader: 'CyberWolf', logo: '🔥' },
+    { id: 2, name: '[PHANTOM]', tag: 'PHT', members: 24, rating: 8120, leader: 'NeonAssassin', logo: '👻' },
+    { id: 3, name: '[STORM]', tag: 'STM', members: 31, rating: 7890, leader: 'GlitchMaster', logo: '⚡' },
+    { id: 4, name: '[APEX]', tag: 'APX', members: 19, rating: 7340, leader: 'PixelHunter', logo: '🎯' },
+    { id: 5, name: '[NEXUS]', tag: 'NXS', members: 22, rating: 6980, leader: 'ByteKiller', logo: '🌀' },
+  ];
+
+  const forumTopics = [
+    { id: 1, title: 'Лучшие тактики для de_dust2', author: 'TacticalPro', replies: 47, views: 892, category: 'Тактика', date: '2 часа назад', hot: true },
+    { id: 2, title: 'Набор в клан [ELITE] - требования', author: 'CyberWolf', replies: 23, views: 456, category: 'Кланы', date: '5 часов назад', hot: true },
+    { id: 3, title: 'Гайд по настройке оружия', author: 'WeaponMaster', replies: 89, views: 1523, category: 'Гайды', date: '1 день назад', hot: false },
+    { id: 4, title: 'Обсуждение новой карты de_cybercity', author: 'MapExplorer', replies: 34, views: 678, category: 'Обновления', date: '2 дня назад', hot: false },
+    { id: 5, title: 'Поиск тиммейтов для турнира', author: 'TeamSeeker', replies: 15, views: 234, category: 'Команды', date: '3 дня назад', hot: false },
+  ];
+
   return (
     <div className="min-h-screen bg-background cyber-grid">
       <nav className="border-b border-primary/30 backdrop-blur-sm sticky top-0 z-50">
@@ -293,37 +309,176 @@ const Index = () => {
           </TabsContent>
 
           <TabsContent value="клан" className="space-y-6">
-            <Card className="neon-border bg-card/50 backdrop-blur-sm">
+            <div className="flex flex-col sm:flex-row gap-4 mb-6">
+              <Button className="font-orbitron bg-primary hover:bg-primary/80 flex-1">
+                <Icon name="Plus" className="mr-2" size={20} />
+                СОЗДАТЬ КЛАН
+              </Button>
+              <Button variant="outline" className="font-orbitron flex-1">
+                <Icon name="Search" className="mr-2" size={20} />
+                НАЙТИ КЛАН
+              </Button>
+            </div>
+
+            <Card className="neon-border bg-card/50 backdrop-blur-sm mb-6">
               <CardHeader>
-                <CardTitle className="font-orbitron">КЛАНОВАЯ СИСТЕМА</CardTitle>
+                <CardTitle className="font-orbitron flex items-center gap-2">
+                  <Icon name="Trophy" className="text-accent" size={24} />
+                  ТОП КЛАНОВ
+                </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="text-muted-foreground">
-                  Создавайте кланы, набирайте участников и сражайтесь за первое место в клановом рейтинге!
-                </p>
-                <Button className="font-orbitron bg-primary hover:bg-primary/80">
-                  <Icon name="Users" className="mr-2" size={20} />
-                  СОЗДАТЬ КЛАН
-                </Button>
+              <CardContent>
+                <div className="space-y-3">
+                  {clans.map((clan) => (
+                    <div 
+                      key={clan.id}
+                      className="p-4 bg-muted/20 rounded-lg hover:bg-muted/30 transition-all cursor-pointer border border-primary/20 hover:border-primary/50"
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-4">
+                          <div className="text-4xl">{clan.logo}</div>
+                          <div>
+                            <div className="flex items-center gap-2">
+                              <span className="font-orbitron font-bold text-lg">{clan.name}</span>
+                              <span className="text-xs bg-primary/20 px-2 py-1 rounded text-primary">{clan.tag}</span>
+                            </div>
+                            <div className="text-sm text-muted-foreground mt-1">
+                              Лидер: <span className="text-accent">{clan.leader}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="font-orbitron font-bold text-xl text-primary">{clan.rating.toLocaleString()}</div>
+                          <div className="text-xs text-muted-foreground flex items-center gap-1 justify-end">
+                            <Icon name="Users" size={12} />
+                            {clan.members} игроков
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </CardContent>
             </Card>
+
+            <div className="grid md:grid-cols-3 gap-4">
+              <Card className="bg-card/50 backdrop-blur-sm">
+                <CardContent className="p-6 text-center">
+                  <Icon name="Users" className="mx-auto mb-2 text-primary" size={32} />
+                  <div className="text-2xl font-orbitron font-bold">{clans.reduce((sum, c) => sum + c.members, 0)}</div>
+                  <div className="text-sm text-muted-foreground">Всего участников</div>
+                </CardContent>
+              </Card>
+              <Card className="bg-card/50 backdrop-blur-sm">
+                <CardContent className="p-6 text-center">
+                  <Icon name="Shield" className="mx-auto mb-2 text-secondary" size={32} />
+                  <div className="text-2xl font-orbitron font-bold">{clans.length}</div>
+                  <div className="text-sm text-muted-foreground">Активных кланов</div>
+                </CardContent>
+              </Card>
+              <Card className="bg-card/50 backdrop-blur-sm">
+                <CardContent className="p-6 text-center">
+                  <Icon name="Swords" className="mx-auto mb-2 text-accent" size={32} />
+                  <div className="text-2xl font-orbitron font-bold">24</div>
+                  <div className="text-sm text-muted-foreground">Клановых войн</div>
+                </CardContent>
+              </Card>
+            </div>
           </TabsContent>
 
           <TabsContent value="форум" className="space-y-6">
+            <div className="flex flex-col sm:flex-row gap-4 mb-6">
+              <Button className="font-orbitron bg-primary hover:bg-primary/80 flex-1">
+                <Icon name="Plus" className="mr-2" size={20} />
+                СОЗДАТЬ ТЕМУ
+              </Button>
+              <Button variant="outline" className="font-orbitron flex-1">
+                <Icon name="Search" className="mr-2" size={20} />
+                ПОИСК
+              </Button>
+            </div>
+
             <Card className="neon-border bg-card/50 backdrop-blur-sm">
               <CardHeader>
-                <CardTitle className="font-orbitron">ФОРУМ СООБЩЕСТВА</CardTitle>
+                <CardTitle className="font-orbitron flex items-center gap-2">
+                  <Icon name="MessageSquare" className="text-primary" size={24} />
+                  ОБСУЖДЕНИЯ
+                </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  Общайтесь с другими игроками, делитесь тактиками и обсуждайте последние обновления.
-                </p>
-                <Button className="font-orbitron bg-primary hover:bg-primary/80">
-                  <Icon name="MessageSquare" className="mr-2" size={20} />
-                  ПЕРЕЙТИ НА ФОРУМ
-                </Button>
+                <div className="space-y-3">
+                  {forumTopics.map((topic) => (
+                    <div 
+                      key={topic.id}
+                      className="p-4 bg-muted/20 rounded-lg hover:bg-muted/30 transition-all cursor-pointer border border-primary/20 hover:border-primary/50"
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-2">
+                            {topic.hot && (
+                              <Icon name="Flame" className="text-orange-500" size={16} />
+                            )}
+                            <h3 className="font-orbitron font-bold text-foreground hover:text-primary transition-colors">
+                              {topic.title}
+                            </h3>
+                          </div>
+                          <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+                            <span className="bg-primary/20 px-2 py-1 rounded text-xs text-primary">{topic.category}</span>
+                            <span className="flex items-center gap-1">
+                              <Icon name="User" size={12} />
+                              {topic.author}
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <Icon name="MessageCircle" size={12} />
+                              {topic.replies}
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <Icon name="Eye" size={12} />
+                              {topic.views}
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <Icon name="Clock" size={12} />
+                              {topic.date}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </CardContent>
             </Card>
+
+            <div className="grid md:grid-cols-4 gap-4">
+              <Card className="bg-card/50 backdrop-blur-sm">
+                <CardContent className="p-4 text-center">
+                  <Icon name="FileText" className="mx-auto mb-2 text-primary" size={24} />
+                  <div className="text-xl font-orbitron font-bold">247</div>
+                  <div className="text-xs text-muted-foreground">Тем</div>
+                </CardContent>
+              </Card>
+              <Card className="bg-card/50 backdrop-blur-sm">
+                <CardContent className="p-4 text-center">
+                  <Icon name="MessageCircle" className="mx-auto mb-2 text-secondary" size={24} />
+                  <div className="text-xl font-orbitron font-bold">1.2K</div>
+                  <div className="text-xs text-muted-foreground">Сообщений</div>
+                </CardContent>
+              </Card>
+              <Card className="bg-card/50 backdrop-blur-sm">
+                <CardContent className="p-4 text-center">
+                  <Icon name="Users" className="mx-auto mb-2 text-accent" size={24} />
+                  <div className="text-xl font-orbitron font-bold">156</div>
+                  <div className="text-xs text-muted-foreground">Участников</div>
+                </CardContent>
+              </Card>
+              <Card className="bg-card/50 backdrop-blur-sm">
+                <CardContent className="p-4 text-center">
+                  <Icon name="TrendingUp" className="mx-auto mb-2 text-primary" size={24} />
+                  <div className="text-xl font-orbitron font-bold">42</div>
+                  <div className="text-xs text-muted-foreground">Онлайн</div>
+                </CardContent>
+              </Card>
+            </div>
           </TabsContent>
 
           <TabsContent value="контакты" className="space-y-6">
