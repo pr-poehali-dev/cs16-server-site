@@ -52,6 +52,32 @@ const Index = () => {
     { id: 5, title: 'Поиск тиммейтов для турнира', author: 'TeamSeeker', replies: 15, views: 234, category: 'Команды', date: '3 дня назад', hot: false },
   ];
 
+  const inventoryItems = [
+    { id: 1, name: 'AK-47 | Неоновый Рейдер', rarity: 'legendary', type: 'Винтовка', wear: 'Немного поношенное', price: '2,450₽', emoji: '🔫', color: 'from-red-500 to-orange-500' },
+    { id: 2, name: 'Desert Eagle | Киберпанк', rarity: 'rare', type: 'Пистолет', wear: 'Прямо с завода', price: '890₽', emoji: '🔫', color: 'from-blue-500 to-purple-500' },
+    { id: 3, name: 'AWP | Электрошок', rarity: 'mythical', type: 'Снайперская', wear: 'Закалённое', price: '5,200₽', emoji: '🎯', color: 'from-purple-500 to-pink-500' },
+    { id: 4, name: 'M4A1-S | Призрак', rarity: 'legendary', type: 'Винтовка', wear: 'Немного поношенное', price: '1,780₽', emoji: '🔫', color: 'from-cyan-500 to-blue-500' },
+    { id: 5, name: 'USP-S | Неон', rarity: 'common', type: 'Пистолет', wear: 'После полевых испытаний', price: '340₽', emoji: '🔫', color: 'from-gray-500 to-gray-600' },
+    { id: 6, name: 'Нож | Бабочка Градиент', rarity: 'ultra', type: 'Нож', wear: 'Прямо с завода', price: '18,500₽', emoji: '🗡️', color: 'from-yellow-500 to-red-500' },
+  ];
+
+  const cases = [
+    { id: 1, name: 'Кейс "Киберпанк"', price: '250₽', emoji: '📦', color: 'from-purple-500 to-blue-500' },
+    { id: 2, name: 'Кейс "Неоновый город"', price: '180₽', emoji: '📦', color: 'from-pink-500 to-orange-500' },
+    { id: 3, name: 'Премиум кейс', price: '450₽', emoji: '🎁', color: 'from-yellow-500 to-red-500' },
+  ];
+
+  const getRarityLabel = (rarity: string) => {
+    const labels: Record<string, string> = {
+      common: 'Армейское',
+      rare: 'Редкое',
+      mythical: 'Мифическое',
+      legendary: 'Легендарное',
+      ultra: 'Тайное'
+    };
+    return labels[rarity] || rarity;
+  };
+
   return (
     <div className="min-h-screen bg-background cyber-grid">
       <nav className="border-b border-primary/30 backdrop-blur-sm sticky top-0 z-50">
@@ -61,7 +87,7 @@ const Index = () => {
               CS 1.6 SERVER
             </h1>
             <div className="hidden md:flex gap-6">
-              {['Главная', 'Сервер', 'Рейтинг', 'Новости', 'Клан', 'Форум', 'Контакты'].map((item) => (
+              {['Главная', 'Сервер', 'Рейтинг', 'Новости', 'Инвентарь', 'Клан', 'Форум', 'Контакты'].map((item) => (
                 <button
                   key={item}
                   onClick={() => setActiveTab(item.toLowerCase())}
@@ -306,6 +332,107 @@ const Index = () => {
                 </CardContent>
               </Card>
             ))}
+          </TabsContent>
+
+          <TabsContent value="инвентарь" className="space-y-6">
+            <div className="grid md:grid-cols-3 gap-4 mb-6">
+              <Card className="bg-card/50 backdrop-blur-sm">
+                <CardContent className="p-6 text-center">
+                  <Icon name="Package" className="mx-auto mb-2 text-primary" size={32} />
+                  <div className="text-2xl font-orbitron font-bold">{inventoryItems.length}</div>
+                  <div className="text-sm text-muted-foreground">Предметов</div>
+                </CardContent>
+              </Card>
+              <Card className="bg-card/50 backdrop-blur-sm">
+                <CardContent className="p-6 text-center">
+                  <Icon name="DollarSign" className="mx-auto mb-2 text-accent" size={32} />
+                  <div className="text-2xl font-orbitron font-bold">29,160₽</div>
+                  <div className="text-sm text-muted-foreground">Стоимость</div>
+                </CardContent>
+              </Card>
+              <Card className="bg-card/50 backdrop-blur-sm">
+                <CardContent className="p-6 text-center">
+                  <Icon name="Star" className="mx-auto mb-2 text-secondary" size={32} />
+                  <div className="text-2xl font-orbitron font-bold">3</div>
+                  <div className="text-sm text-muted-foreground">Легендарных</div>
+                </CardContent>
+              </Card>
+            </div>
+
+            <Card className="neon-border bg-card/50 backdrop-blur-sm mb-6">
+              <CardHeader>
+                <CardTitle className="font-orbitron flex items-center gap-2">
+                  <Icon name="Package" className="text-primary" size={24} />
+                  ОРУЖИЕ И СКИНЫ
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {inventoryItems.map((item) => (
+                    <div 
+                      key={item.id}
+                      className="p-4 rounded-lg border border-primary/30 hover:border-primary/60 transition-all cursor-pointer bg-gradient-to-br from-card/80 to-card/40 backdrop-blur group hover:scale-105"
+                    >
+                      <div className={`text-5xl mb-3 text-center bg-gradient-to-r ${item.color} bg-clip-text text-transparent`}>
+                        {item.emoji}
+                      </div>
+                      <div className="space-y-2">
+                        <div className="font-orbitron font-bold text-sm group-hover:text-primary transition-colors">
+                          {item.name}
+                        </div>
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="text-muted-foreground">{item.type}</span>
+                          <span className={`px-2 py-1 rounded text-xs font-bold bg-gradient-to-r ${item.color}`}>
+                            {getRarityLabel(item.rarity)}
+                          </span>
+                        </div>
+                        <div className="text-xs text-muted-foreground">{item.wear}</div>
+                        <div className="flex items-center justify-between pt-2 border-t border-primary/20">
+                          <span className="font-orbitron font-bold text-accent">{item.price}</span>
+                          <Button size="sm" variant="outline" className="text-xs">
+                            <Icon name="TrendingUp" size={12} className="mr-1" />
+                            Продать
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="neon-border bg-card/50 backdrop-blur-sm">
+              <CardHeader>
+                <CardTitle className="font-orbitron flex items-center gap-2">
+                  <Icon name="Gift" className="text-secondary" size={24} />
+                  ОТКРЫТЬ КЕЙС
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid md:grid-cols-3 gap-4">
+                  {cases.map((caseItem) => (
+                    <div 
+                      key={caseItem.id}
+                      className="p-6 rounded-lg border border-secondary/30 hover:border-secondary/80 transition-all cursor-pointer bg-gradient-to-br from-card/80 to-card/40 backdrop-blur group hover:scale-105"
+                    >
+                      <div className={`text-6xl mb-4 text-center bg-gradient-to-r ${caseItem.color} bg-clip-text text-transparent animate-pulse`}>
+                        {caseItem.emoji}
+                      </div>
+                      <div className="text-center space-y-3">
+                        <div className="font-orbitron font-bold group-hover:text-secondary transition-colors">
+                          {caseItem.name}
+                        </div>
+                        <div className="font-orbitron text-xl font-bold text-accent">{caseItem.price}</div>
+                        <Button className="w-full bg-gradient-to-r from-secondary to-primary hover:from-primary hover:to-secondary">
+                          <Icon name="Unlock" className="mr-2" size={16} />
+                          Открыть
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
           </TabsContent>
 
           <TabsContent value="клан" className="space-y-6">
